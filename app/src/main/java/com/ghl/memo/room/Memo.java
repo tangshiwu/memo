@@ -2,10 +2,13 @@ package com.ghl.memo.room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Memo {
+public class Memo implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @ColumnInfo(name = "title")
@@ -14,6 +17,10 @@ public class Memo {
     private String content;
     @ColumnInfo(name = "date")
     private String date;
+
+    @Ignore
+    public Memo() {
+    }
 
     public Memo(String title, String content, String date) {
         this.title = title;
@@ -51,5 +58,15 @@ public class Memo {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Memo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                '}';
     }
 }
